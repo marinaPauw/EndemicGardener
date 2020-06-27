@@ -1,0 +1,29 @@
+
+@model List<Plant>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h2 class="display-4">Catalogue of nursery plants</h2>
+    <h5 class="display-5">Note: not all plants are available at all times of the year.</h5>
+</div>
+<div class="card-columns">
+    @foreach(var item in Model){
+        <div class="card">
+            <div class ="card-img card-hover" style = "background-image: url('@item.PicUrl');"></div>
+            
+            <div class= "card-body">
+                <h5 class="card-title">@item.PlantName</h5>
+            </div>
+            
+            <a class = "card-bottom">
+                @if(item.Bee){
+        <img class = "footer-icon" src="https://img.icons8.com/ios/50/000000/bee-top-view.png"/>                
+            }
+            <h8>@item.ConservationStatus</h8>
+        </a>
+        </div>
+}
+ </div>
+

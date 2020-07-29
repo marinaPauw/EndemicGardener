@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -76,6 +76,11 @@ namespace EndemicGardening.Controllers
                 return RedirectToAction("Index");
             }
         }
+        public IActionResult Maps()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

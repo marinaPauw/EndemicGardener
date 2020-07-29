@@ -15,10 +15,15 @@ for details on configuring this project to bundle and minify static web assets. 
     -webkit-transform-style: preserve-3d;
 }
 
-.card-columns .card-body {
-    height: 100px;
-    font-family: 'Nunito', sans-serif;
-    background: #fbfafd;
+card-columns .card-body .top{
+  height: 50px;
+  font-family: 'Nunito', sans-serif;
+  background: #fbfafd;
+}
+
+.card-columns .card-body .tags{
+height: 15px;
+background: #fbfafd;
 }
 
 .card-columns .card-img {
@@ -147,12 +152,30 @@ ul {
 .display-5 {
   padding: 20px;
 }
-.card-bottom {
-  background: #fbfafd;
-  float: right;
-  height: 15px; 
-  padding: -10px;
-}
-.card-bottom .footer-icon {
+#Bee, #Butterfly, #Flower, #Edible, #Bird, #CS{
   height: 15px;
+  background: #fbfafd;
 }
+
+#BeeText, #BirdText, #FlowerText, #EdibleText, #ButterflyText, #CSText {
+  display: none;
+}
+#Bee:hover ~ a#BeeText {
+  display: block; 
+}
+#Bird:hover ~ a#BirdText {
+  display: block; 
+}
+#Flower:hover ~ a#FlowerText {
+  display: block; 
+}
+#Edible:hover ~ a#EdibleText {
+  display: block; 
+}
+#Butterfly:hover ~ a#ButterflyText {
+  display: block; 
+}
+#conservationStatus:hover ~ a#CSText {
+  display: block; 
+}
+

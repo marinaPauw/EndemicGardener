@@ -14,6 +14,7 @@ namespace EndemicGardening.Models
         public bool Edible {get;set;}
         public bool Flower {get;set;}
         public string ConservationStatus {get; set;}
+        public string CS = "Unknown";
 
     }
 }

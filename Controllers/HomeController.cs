@@ -60,6 +60,22 @@ namespace EndemicGardening.Controllers
                 }
             else{plant.CS = "Conservation status:Unknown";}
         }
+        public IActionResult Details(int Id)
+        {
+            var plant = _context.Plants.SingleOrDefault(p => p.PlantId == Id);
+            var vm = new DetailsViewModel {
+                Plant = plant
+            };
+
+            if (plant != null)
+            {
+                return View(vm);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
         public IActionResult Privacy()
         {
             return View();

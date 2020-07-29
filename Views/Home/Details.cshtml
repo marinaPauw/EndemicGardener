@@ -1,0 +1,13 @@
+@model DetailsViewModel
+@{
+    ViewData["Title"] = "Details for " + Model.Plant.PlantName;
+}
+
+<div class="text-center">
+    <h1 class="display-4">@Model.Plant.PlantName</h1>
+    <img src="@Model.Plant.PicUrl" alt="@Model.Plant.PlantName"
+        class="img-thumbnail" 
+        height="320" width="320" />
+    <p>@Model.Plant.Descript</p>
+    <p>@Model.Plant.Tips</p>
+</div>

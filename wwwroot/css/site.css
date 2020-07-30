@@ -152,6 +152,8 @@ ul {
 .display-5 {
   padding: 20px;
 }
+
+
 #Bee, #Butterfly, #Flower, #Edible, #Bird, #CS{
   height: 15px;
   background: #fbfafd;
@@ -177,5 +179,12 @@ ul {
 }
 #conservationStatus:hover ~ a#CSText {
   display: block; 
+}
+#map{
+  height: 800px;
+  vertical-align: bottom;
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-size: cover; 
 }
 

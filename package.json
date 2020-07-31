@@ -7,10 +7,11 @@
     "build": "webpack ./wwwroot/js/map.js --output webpackBundle.js"
   },
   "dependencies": {
+    "ol": "^6.4.0",
+    "proj4": "^2.6.2",
     "webpack": "^4.44.0",
     "webpack-cli": "^3.3.12",
-    "webpack-command": "^0.3.0",
-    "ol": "^6.4.0"
+    "webpack-command": "^0.3.0"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,7 @@
   },
   "homepage": "https://github.com/marinaPauw/EndemicGardener#readme",
   "devDependencies": {
-    "css-loader": "^4.1.0",
+    "css-loader": "^4.1.1",
     "style-loader": "^1.2.1"
   }
 }

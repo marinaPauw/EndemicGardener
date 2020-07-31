@@ -358,3 +358,4 @@ MigrationBackup/
 .vscode/launch.json
 
 .vscode/tasks.json
+wwwroot/js/SimplifiedGEOJSON.json

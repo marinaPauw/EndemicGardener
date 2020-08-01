@@ -7,8 +7,12 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
 import {Fill, Stroke, Style, Text} from 'ol/style';
+//Searchbar:
+import 'ol-ext/control/Search.css';
+import SearchNominatim from 'ol-ext/control/SearchNominatim';
 
 var style = new Style({
+  
   fill: new Fill({
     color: 'rgba(255, 255, 255, 0.6)',
   }),
@@ -50,21 +54,24 @@ var biomes = new VectorLayer({
 
 
 
+var osm = new TileLayer({
+  source: new OSM(),
+})
 
 var map = new Map({
   layers: [
-    new TileLayer({
-      source: new OSM(),
-    }),
-     biomes 
+    osm,biomes 
     ],
   target: 'map',
   view: new View({
     projection: 'EPSG:4326',
-    center: [0, 0],
-    zoom: 2,
+    center: [19.5,-34.0],
+    zoom: 7,
   }),
 });
+
+
+
 var highlightStyle = new Style({
   stroke: new Stroke({
     color: '#f00',
@@ -85,6 +92,17 @@ var highlightStyle = new Style({
   }),
 });
 
+// Search control
+const search = new SearchNominatim();
+// Move to the position on selection in the control list
+search.on('select', function (e) {
+    map.getView().animate({
+        center: e.coordinate,
+        zoom: Math.max(map.getView().getZoom(), 16)
+    });
+});
+map.addControl(search);
+
 var featureOverlay = new VectorLayer({
   source: new VectorSource(),
   map: map,
@@ -101,10 +119,18 @@ var displayFeatureInfo = function (pixel) {
   });
 
   var info = document.getElementById('info');
+  var closeModal = document.getElementById('closeModal');
+  var homebiome = document.getElementById("homebiome");
+  var BiomeModal = document.getElementById("BiomeModal");
   if (feature) {
     info.innerHTML = feature.get('NAME');
+    homebiome.innerHTML = feature.get('NAME');
+    map.on('click', function (evt) {
+      BiomeModal.style.display = "block";
+    });
   } else {
     info.innerHTML = '&nbsp;';
+    homebiome = "Biome not found";
   }
 
   if (feature !== highlight) {
@@ -126,6 +152,15 @@ map.on('pointermove', function (evt) {
   displayFeatureInfo(pixel);
 });
 
-map.on('click', function (evt) {
-  displayFeatureInfo(evt.pixel);
-});
+
+
+closeModal.onclick = function() 
+  {
+    BiomeModal.style.display = "none";
+  }
+
+window.onclick = function(event) {
+  if (event.target == BiomeModal) {
+    BiomeModal.style.display = "none";
+  }
+}

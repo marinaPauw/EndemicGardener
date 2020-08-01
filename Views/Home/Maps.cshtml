@@ -1,12 +1,30 @@
 @{
     ViewData["Title"] = "Maps";
 }
+
   <head>
     <h5>Find your home to find the bioregion to which you belong.</h5>
   </head>
   <body>
     <div id="map" class="map"></div>
+    
     <div id="info">&nbsp;</div>
     <script type = "module" src="/js/webpackBundle.js" ></script>
+    <div id="BiomeModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id = "homebiome">Biome region not found</h2>
+          <span class="close" id = "closeModal">&times;</span>
+        </div>
+        <div class="modal-body">
+          <p>Some text that will link to the DB</p>
+        </div>
+        <div class="modal-footer">
+          <button id="plantpathway" class="btn btn-primary">Which plants should I plant?</button>
+        </div>
+      </div>
+  </div>
   </body>
+
+
 

@@ -359,3 +359,4 @@ MigrationBackup/
 
 .vscode/tasks.json
 wwwroot/js/SimplifiedGEOJSON.json
+wwwroot/images/SANBiMAP.png

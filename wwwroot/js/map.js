@@ -7,6 +7,7 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
 import {Fill, Stroke, Style, Text} from 'ol/style';
+import Group from 'ol/layer';
 //Searchbar:
 import 'ol-ext/control/Search.css';
 import SearchNominatim from 'ol-ext/control/SearchNominatim';
@@ -64,7 +65,7 @@ var osm = new TileLayer({
 
 var map = new Map({
   layers: [
-    osm
+    osm,biomes
     ],
   target: 'map',
   view: new View({
@@ -172,31 +173,11 @@ window.onclick = function(event) {
 
 
 //Layerswitcher
-var layerswitch = new LayerSwitcherImage({
-  show_progress: false
-});
-
-var switcher = new LayerSwitcher({
-  target:$(".layerSwitcher").get(0), 
-});
-
-map.addControl(switcher);
-// Redraw layer when fonts are loaded
- // When switcher is drawn hide/show the list item according to its visility
- switcher.on('drawlist', function(e) {
-  // Hide Layer Group with no layers visible
-  if (e.layer.getLayers) {
-    if (e.layer.get('noLayer')) {
-      $(e.li).hide();
-    } else {
-      $(e.li).show();
-    }
-  } else {
-    var rex = new RegExp(search.val());
-    if (rex.test(e.layer.get('title'))) {
-      $(e.li).show();
-    } else {
-      $(e.li).hide();
-    }
-  }
-});
+const osmcheck = document.querySelector('.sidebar > input[name = osmcheckbox]');
+const vegcheck = document.querySelector('.sidebar > input[name = vegcheckbox]');
+osmcheck.addEventListener('change', function(){
+  osm.setVisible(!osm.getVisible());
+ })
+vegcheck.addEventListener('change', function(){
+  biomes.setVisible(!biomes.getVisible());
+  })

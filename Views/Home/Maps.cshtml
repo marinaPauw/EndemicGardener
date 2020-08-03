@@ -3,20 +3,26 @@
 }
 
   <head>
-    <h5>Find your home to find the bioregion to which you belong.</h5>
+    <h5>Find your home and activate the vegetation map layer, then click on the map to see details:</h5>
   </head>
   <body>
     
     <div class="grid-container">
         <div class='grid-1'>
           <div class='sidebar'>
-            <h2>Map layers</h2>
+            <h5>Map layers</h5>
             <input type = 'checkbox' name ='osmcheckbox' value = 'Open street map' checked>Open street map<br>
             <input type = 'checkbox' name = 'vegcheckbox' value = 'Vegetation map'>Vegetation map<br>
           </div>
         </div>
         <div class='grid-2'>
             <div id="map" class="map">
+              <div id="throbber">
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/d/de/Ajax-loader.gif"
+                    alt="Spinning wheel">
+              </div>
+            </div>
         </div>
     </div>
 

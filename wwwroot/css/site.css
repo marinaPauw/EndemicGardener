@@ -182,7 +182,7 @@ ul {
   display: block; 
 }
 #map{
-  width: 40%;
+  width: 70%;
   height: 800px;
 }
 
@@ -275,11 +275,20 @@ ul {
 
 .grid-container{
   display: grid;
-  grid-template-columns: 20vw 80vw;
+  grid-template-columns: max-content auto;
   grid-template-rows: 100vh;
   text-align: left;
 }
 
 .sidebar{
+  margin-top: 35px;
+  margin-right: 20px;
   margin-left: 5px;
+  width: max-content;
+}
+
+input[type='checkbox'] {
+ margin-right: 8px;
+ margin-bottom: 10px;
+ margin-inline: 10px;
 }

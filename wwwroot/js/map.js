@@ -12,6 +12,7 @@ import Group from 'ol/layer';
 import 'ol-ext/control/Search.css';
 import SearchNominatim from 'ol-ext/control/SearchNominatim';
 import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
+import LoadingPanel from 'ol/control';
 
 var style = new Style({
   
@@ -181,3 +182,24 @@ osmcheck.addEventListener('change', function(){
 vegcheck.addEventListener('change', function(){
   biomes.setVisible(!biomes.getVisible());
   })
+
+//throbber
+var vegLoaded = false;
+var onChangeVisible = function (e) {
+    if(vegcheck.checked && vegLoaded==false){
+      this.throbberVisible = true;
+      document.getElementById('throbber').style.display = 'block';
+      vegLoaded =true;
+    }
+
+};
+biomes.on('change:visible', onChangeVisible);
+
+var listenerKey = biomeSource.on('change', function(e) 
+{
+  if (biomeSource.getState() == 'ready') 
+  {
+    document.getElementById('throbber').style.display = 'none';
+    this.throbberVisible = false;
+  } 
+})

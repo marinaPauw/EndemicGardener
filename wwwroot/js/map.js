@@ -10,6 +10,7 @@ import {Fill, Stroke, Style, Text} from 'ol/style';
 //Searchbar:
 import 'ol-ext/control/Search.css';
 import SearchNominatim from 'ol-ext/control/SearchNominatim';
+import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 
 var style = new Style({
   
@@ -34,7 +35,7 @@ var style = new Style({
 });
 
 
-var vectorSource = new VectorSource({
+var biomeSource = new VectorSource({
    
   url: '/js/SimplifiedGEOJSON.json',
   format: new GeoJSON({"dataProjection" : 'EPSG:4326', "featureProjection": 'EPSG:4326'})
@@ -43,8 +44,9 @@ var vectorSource = new VectorSource({
 })
 
 var biomes = new VectorLayer({
-  source: vectorSource,
-  visible: true,
+  name: "Vegetation map",
+  source: biomeSource,
+  visible: false,
   style: function (feature) {
     style.getText().setText(feature.get('NAME'));
     return style;
@@ -56,11 +58,13 @@ var biomes = new VectorLayer({
 
 var osm = new TileLayer({
   source: new OSM(),
+  displayInLayerSwitcher:false,
+  name: 'Open street map'
 })
 
 var map = new Map({
   layers: [
-    osm,biomes 
+    osm
     ],
   target: 'map',
   view: new View({
@@ -70,7 +74,7 @@ var map = new Map({
   }),
 });
 
-
+//Highlighting biomes
 
 var highlightStyle = new Style({
   stroke: new Stroke({
@@ -92,16 +96,6 @@ var highlightStyle = new Style({
   }),
 });
 
-// Search control
-const search = new SearchNominatim();
-// Move to the position on selection in the control list
-search.on('select', function (e) {
-    map.getView().animate({
-        center: e.coordinate,
-        zoom: Math.max(map.getView().getZoom(), 16)
-    });
-});
-map.addControl(search);
 
 var featureOverlay = new VectorLayer({
   source: new VectorSource(),
@@ -152,7 +146,18 @@ map.on('pointermove', function (evt) {
   displayFeatureInfo(pixel);
 });
 
+// Search control
+const search = new SearchNominatim();
+search.on('select', function (e) {
+    map.getView().animate({
+        center: e.coordinate,
+        zoom: Math.max(map.getView().getZoom(), 16)
+    });
+});
+map.addControl(search);
 
+
+//Modal
 
 closeModal.onclick = function() 
   {
@@ -164,3 +169,34 @@ window.onclick = function(event) {
     BiomeModal.style.display = "none";
   }
 }
+
+
+//Layerswitcher
+var layerswitch = new LayerSwitcherImage({
+  show_progress: false
+});
+
+var switcher = new LayerSwitcher({
+  target:$(".layerSwitcher").get(0), 
+});
+
+map.addControl(switcher);
+// Redraw layer when fonts are loaded
+ // When switcher is drawn hide/show the list item according to its visility
+ switcher.on('drawlist', function(e) {
+  // Hide Layer Group with no layers visible
+  if (e.layer.getLayers) {
+    if (e.layer.get('noLayer')) {
+      $(e.li).hide();
+    } else {
+      $(e.li).show();
+    }
+  } else {
+    var rex = new RegExp(search.val());
+    if (rex.test(e.layer.get('title'))) {
+      $(e.li).show();
+    } else {
+      $(e.li).hide();
+    }
+  }
+});

@@ -182,7 +182,7 @@ ul {
   display: block; 
 }
 #map{
-  width: 100%;
+  width: 40%;
   height: 800px;
 }
 
@@ -259,4 +259,27 @@ ul {
 @-webkit-keyframes fadeIn {
   from {opacity: 0} 
   to {opacity: 1}
+}
+
+
+#throbber {
+  display: none;
+  z-index: 100;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.grid-container{
+  display: grid;
+  grid-template-columns: 20vw 80vw;
+  grid-template-rows: 100vh;
+  text-align: left;
+}
+
+.sidebar{
+  margin-left: 5px;
 }

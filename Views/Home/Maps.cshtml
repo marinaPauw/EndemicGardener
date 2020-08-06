@@ -1,7 +1,6 @@
-@model MapViewModel
+@model List<BioPolygon>
 @{
     ViewData["Title"] = "Maps";
-    string BiomeName = "Unknown";
 }
   <head>
     <h5>Find your home and activate the vegetation map layer, then click on the map to see details:</h5>
@@ -40,14 +39,15 @@
       <div class="modal-content">
         <div class="modal-header">
           <h2 id = "homebiome">Biome Not Found</h2>
-          
+          <input type="hidden" id="BiomeName" value="" />
           <span class="close" id = "closeModal">&times;</span>
         </div>
         <div class="modal-body">
+          
           <p id = 'biomeInfo'>"Description goes here"</p>
         </div>
         <div class="modal-footer">
-              <a id = "mybuton" asp-action="BioPolygonToPlants" 
+              <a id = "plantsViewbtn" asp-action="BioPolygonToPlants" 
                             asp-controller="Home"
                             asp-route-name = "dummy"
                             class="btn btn-primary" >Which plants should I plant?</a>

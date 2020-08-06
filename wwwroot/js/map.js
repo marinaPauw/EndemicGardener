@@ -116,7 +116,6 @@ var displayFeatureInfo = function (pixel) {
 //Set the selected biome in the cshtml file:
   function setBiome(value) {
     $('#BiomeName').val(value);    
-    $('@Model.BiomeName').val(value);   
 }
 
   var info = document.getElementById('info');
@@ -126,7 +125,6 @@ var displayFeatureInfo = function (pixel) {
   if (feature) {
     info.innerHTML = feature.get('NAME');
     homebiome.innerHTML = feature.get('NAME');
-    
     map.on('click', function (evt) {
       BiomeModal.style.display = "block";
       setBiome(feature.get('NAME'));
@@ -211,7 +209,7 @@ var listenerKey = biomeSource.on('change', function(e)
   } 
 })
 
-$("#mybuton").click(function (e) {
+$("#plantsViewbtn").click(function (e) {
   // Stop the normal navigation
   e.preventDefault();
 

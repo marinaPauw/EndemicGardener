@@ -12,7 +12,6 @@ namespace EndemicGardening.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private PlantContext _context;
 
         public HomeController(PlantContext context)
@@ -25,15 +24,32 @@ namespace EndemicGardening.Controllers
             return View();
         }
 
+        
+
+        public IActionResult BioPolygonToPlants(string name)
+        {       
+                var biopolygon = _context.BioPolygon.SingleOrDefault(b=> b.Name == name);
+                var plants = _context.BioPolygon.Where(b=> b.Name == name).SelectMany(btp => btp.BioPolygonToPlants.Select(b=>b.Plant)).ToList();
+                               
+                var bm = new BiomePlantsViewModel 
+                {
+                    BioPolygon = biopolygon,
+                    Plants = plants
+                };
+                return View(bm);
+        }
+
         public IActionResult PlantCatalogue()
         {
             var plants =_context.Plants.ToList();
-            if(plants == null){
+            if(plants == null)
+            {
                 Console.WriteLine("Uh-Oh plants is null!");
             }    
             else
             {
-                foreach(Plant plant in plants){
+                foreach(Plant plant in plants)
+                {
                     AllocateCS(plant);
                 }
             }
@@ -58,7 +74,10 @@ namespace EndemicGardening.Controllers
                 {
                     plant.CS = "Conservation status:Least Concern";
                 }
-            else{plant.CS = "Conservation status:Unknown";}
+            else
+                {
+                    plant.CS = "Conservation status:Unknown";
+                }
         }
         public IActionResult Details(int Id)
         {
@@ -78,8 +97,11 @@ namespace EndemicGardening.Controllers
         }
         public IActionResult Maps()
         {
-            return View();
+            return View(new MapViewModel());
+            
         }
+        
+
 
         public IActionResult Privacy()
         {

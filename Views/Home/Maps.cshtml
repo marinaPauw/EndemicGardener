@@ -1,7 +1,8 @@
+@model MapViewModel
 @{
     ViewData["Title"] = "Maps";
+    string BiomeName = "Unknown";
 }
-
   <head>
     <h5>Find your home and activate the vegetation map layer, then click on the map to see details:</h5>
   </head>
@@ -26,26 +27,30 @@
         </div>
     </div>
 
-  
+    
     <div id="throbber">
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/d/de/Ajax-loader.gif"
         alt="Spinning wheel">
     </div>
-
+    
     <div id="info">&nbsp;</div>
     <script type = "module" src="/js/webpackBundle.js" ></script>
     <div id="BiomeModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
-          <h2 id = "homebiome">Biome region not found</h2>
+          <h2 id = "homebiome">Biome Not Found</h2>
+          
           <span class="close" id = "closeModal">&times;</span>
         </div>
         <div class="modal-body">
-          <p>Some text that will link to the DB</p>
+          <p id = 'biomeInfo'>"Description goes here"</p>
         </div>
         <div class="modal-footer">
-          <button id="plantpathway" class="btn btn-primary">Which plants should I plant?</button>
+              <a id = "mybuton" asp-action="BioPolygonToPlants" 
+                            asp-controller="Home"
+                            asp-route-name = "dummy"
+                            class="btn btn-primary" >Which plants should I plant?</a>
         </div>
       </div>
     </div>

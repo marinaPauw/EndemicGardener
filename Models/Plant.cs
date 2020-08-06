@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace EndemicGardening.Models
 {
     public class Plant
@@ -5,7 +6,6 @@ namespace EndemicGardening.Models
         public int PlantId {get;set;}
         public string PlantName {get;set;}
         public string PicUrl {get;set;}
-        public int BiomeID {get;set;}
         public string Tips {get;set;}
         public string Descript {get;set;}
         public bool Bird {get;set;}
@@ -15,6 +15,9 @@ namespace EndemicGardening.Models
         public bool Flower {get;set;}
         public string ConservationStatus {get; set;}
         public string CS = "Unknown";
+
+        //Navigational property
+        public ICollection<BioPolygonToPlants> BioPolygonToPlants {get;set;}
 
     }
 }

@@ -113,6 +113,11 @@ var displayFeatureInfo = function (pixel) {
   var feature = map.forEachFeatureAtPixel(pixel, function (feature) {
     return feature;
   });
+//Set the selected biome in the cshtml file:
+  function setBiome(value) {
+    $('#BiomeName').val(value);    
+    $('@Model.BiomeName').val(value);   
+}
 
   var info = document.getElementById('info');
   var closeModal = document.getElementById('closeModal');
@@ -121,8 +126,10 @@ var displayFeatureInfo = function (pixel) {
   if (feature) {
     info.innerHTML = feature.get('NAME');
     homebiome.innerHTML = feature.get('NAME');
+    
     map.on('click', function (evt) {
       BiomeModal.style.display = "block";
+      setBiome(feature.get('NAME'));
     });
   } else {
     info.innerHTML = '&nbsp;';
@@ -203,3 +210,19 @@ var listenerKey = biomeSource.on('change', function(e)
     this.throbberVisible = false;
   } 
 })
+
+$("#mybuton").click(function (e) {
+  // Stop the normal navigation
+  e.preventDefault();
+
+  //Build the new URL
+  var url = $(this).attr("href");
+  var name = $('#BiomeName').val() ;
+  url = url.replace("dummy", name);
+
+  //Navigate to the new URL
+  window.location.href = url;
+
+});
+
+

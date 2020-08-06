@@ -3,56 +3,70 @@
     ViewData["Title"] = "BioPolygonToPlants";
 }
 
-<div class="card-columns">
+<div>
     <h1>@Model.BioPolygon.Name</h1>
-    @foreach(var item in Model.Plants){
-        <div class="card">
-            <div class ="card-img card-hover" style = "background-image: url('@item.PicUrl');"></div>
-            
-            <div class= "card-body">
-                <h5 class="card-title">@item.PlantName</h5>
-        
-            
-               <div class="tags">
-                   
-                    @if(item.Bee){
-                        <img id = "Bee" src = "https://cdn.pixabay.com/photo/2012/04/12/11/54/honey-bee-29682_960_720.png"/> 
-                    }
-                    @if(item.Bird){
-                        <img id = "Bird" src="https://cdn.pixabay.com/photo/2017/02/25/23/50/animal-2099057_960_720.png"/>                
-                    }
-                    @if(item.Flower){
-                        <img id = "Flower" src="https://cdn.pixabay.com/photo/2012/05/07/15/47/silhouette-48646_960_720.png"/>                
-                    }
-                    @if(item.Edible){
-                        <img id = "Edible" src="https://cdn.pixabay.com/photo/2012/04/28/19/03/food-44056_960_720.png"/>                
-                    }
-                    @if(item.Butterfly){
-                        <img id = "Butterfly" src="https://cdn.pixabay.com/photo/2016/03/31/23/57/animal-1297939_960_720.png"/>                
-                    }
-                    <h8 id = "conservationStatus"> @item.ConservationStatus</h8>
+    <p>@Model.BioPolygon.Description</p>
+</div>
 
-                    <a id="BeeText">Attracts bees</a>
-                    <a id="BirdText">Attracts birds</a>
-                    <a id="FlowerText">Generates beautiful flowers</a>
-                    <a id="EdibleText">A part of the plant is edible</a>
-                    <a id="ButterflyText">Attracts butterflies</a>
+    @if(Model.Plants.Count()>0)
+    {
+        <div class="card-columns">    
+            @foreach(var item in Model.Plants)
+            {
+                <div class="card">
+                    <div class ="card-img card-hover" style = "background-image: url('@item.PicUrl');"></div>
                     
-                    <a id="CSText">@item.CS</a>
-
-
-                </div>
+                    <div class= "card-body">
+                        <h5 class="card-title">@item.PlantName</h5>
                 
+                    
+                        <div class="tags">
+                        
+                            @if(item.Bee){
+                                <img id = "Bee" src = "https://cdn.pixabay.com/photo/2012/04/12/11/54/honey-bee-29682_960_720.png"/> 
+                            }
+                            @if(item.Bird){
+                                <img id = "Bird" src="https://cdn.pixabay.com/photo/2017/02/25/23/50/animal-2099057_960_720.png"/>                
+                            }
+                            @if(item.Flower){
+                                <img id = "Flower" src="https://cdn.pixabay.com/photo/2012/05/07/15/47/silhouette-48646_960_720.png"/>                
+                            }
+                            @if(item.Edible){
+                                <img id = "Edible" src="https://cdn.pixabay.com/photo/2012/04/28/19/03/food-44056_960_720.png"/>                
+                            }
+                            @if(item.Butterfly){
+                                <img id = "Butterfly" src="https://cdn.pixabay.com/photo/2016/03/31/23/57/animal-1297939_960_720.png"/>                
+                            }
+                            <h8 id = "conservationStatus"> @item.ConservationStatus</h8>
 
-            </div>
-            <div class = "card-footer">
+                            <a id="BeeText">Attracts bees</a>
+                            <a id="BirdText">Attracts birds</a>
+                            <a id="FlowerText">Generates beautiful flowers</a>
+                            <a id="EdibleText">A part of the plant is edible</a>
+                            <a id="ButterflyText">Attracts butterflies</a>
+                            
+                            <a id="CSText">@item.CS</a>
 
-                <a asp-action="Details" 
-                            asp-controller="Home"
-                            asp-route-id="@item.PlantId"
-                            class="btn btn-primary">Details</a>
-            </div>
+
+                        </div>
+                        
+
+                    </div>
+                    <div class = "card-footer">
+
+                        <a asp-action="Details" 
+                                    asp-controller="Home"
+                                    asp-route-id="@item.PlantId"
+                                    class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+            }
         </div>
-}
- </div>
+    } 
+    else
+    {
+        <h5>It appears we do not have any endemic plants for your region or the region classification is simply illdefined.</h5>
+    }
+
+
 

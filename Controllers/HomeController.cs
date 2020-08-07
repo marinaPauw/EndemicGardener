@@ -31,12 +31,29 @@ namespace EndemicGardening.Controllers
                 var biopolygon = _context.BioPolygon.SingleOrDefault(b=> b.Name == name);
                 var plants = _context.BioPolygon.Where(b=> b.Name == name).SelectMany(btp => btp.BioPolygonToPlants.Select(b=>b.Plant)).ToList();
                                
-                var bm = new BiomePlantsViewModel 
+                
+                if(biopolygon!=null)
                 {
-                    BioPolygon = biopolygon,
-                    Plants = plants
-                };
-                return View(bm);
+                    var bm = new BiomePlantsViewModel 
+                    {
+                        BioPolygon = biopolygon,
+                        Plants = plants
+                    };
+                    return View(bm);
+                }
+                else
+                {
+                    return RedirectToAction("BiomeNotFound");
+                }
+        }
+
+        public IActionResult BiomeNotFound()
+        {
+            var em = new BiomeNotFound
+                    {
+                        Message = "I am sorry, but we do not have any data on your region."
+                    };
+                    return View(em);
         }
 
         public IActionResult PlantCatalogue()
@@ -97,12 +114,10 @@ namespace EndemicGardening.Controllers
         }
         public IActionResult Maps()
         {
-            return View(new MapViewModel());
+            var biomes =_context.BioPolygon.ToList();
+            return View(biomes);
             
         }
-        
-
-
         public IActionResult Privacy()
         {
             return View();

@@ -118,6 +118,26 @@ var displayFeatureInfo = function (pixel) {
     $('#BiomeName').val(value);    
 }
 
+//Set the description
+function setDescription(value){
+  var i;
+  for (i = 0; i < biomelist.length; i++) 
+  {
+    if(i==1)
+    {
+      console.log(biomelist[i].Name);
+      console.log(biomelist[i].Description);
+    }
+    
+    if(biomelist[i].Name == value)
+    {
+      console.log(biomelist[i].Name);
+      console.log(value);
+      biomeInfo.innerHTML = biomelist[i].Description;
+    }
+  }
+}
+
   var info = document.getElementById('info');
   var closeModal = document.getElementById('closeModal');
   var homebiome = document.getElementById("homebiome");
@@ -128,6 +148,7 @@ var displayFeatureInfo = function (pixel) {
     map.on('click', function (evt) {
       BiomeModal.style.display = "block";
       setBiome(feature.get('NAME'));
+      setDescription(feature.get('NAME'));
     });
   } else {
     info.innerHTML = '&nbsp;';

@@ -6,12 +6,7 @@ namespace EndemicGardening.Models
 {
     public class MapViewModel
     {
-        
-        public string BiomeName {get;set;}
+        public IEnumerable<BioPolygon> biomes{get;set;}
 
-        public string Description {get;set;}
-
-
-        
     }
 }

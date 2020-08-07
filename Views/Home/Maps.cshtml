@@ -1,12 +1,20 @@
 @model List<BioPolygon>
+@using Newtonsoft.Json
 @{
     ViewData["Title"] = "Maps";
+
 }
   <head>
     <h5>Find your home and activate the vegetation map layer, then click on the map to see details:</h5>
+
+<script>
+    var biomelist = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model,Newtonsoft.Json.Formatting.Indented));
+</script>
+<script src="map.js"></script>
+
   </head>
   <body>
-    
+ 
     <div class="grid-container">
         <div class='grid-1'>
           <div class='sidebar'>

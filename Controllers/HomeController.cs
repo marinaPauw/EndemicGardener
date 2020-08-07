@@ -29,8 +29,12 @@ namespace EndemicGardening.Controllers
         public IActionResult BioPolygonToPlants(string name)
         {       
                 var biopolygon = _context.BioPolygon.SingleOrDefault(b=> b.Name == name);
-                var plants = _context.BioPolygon.Where(b=> b.Name == name).SelectMany(btp => btp.BioPolygonToPlants.Select(b=>b.Plant)).ToList();
-                               
+                var plantIDs = _context.BioPolygonToPlants.Where(b=> b.Name == name).Select(btp => btp.PlantID).ToList();
+                List<Plant> plants = new List<Plant>();
+                foreach(int id in plantIDs)
+                {
+                    plants.Add(_context.Plants.Single(s => s.PlantId == id));
+                }
                 
                 if(biopolygon!=null)
                 {

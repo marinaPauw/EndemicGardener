@@ -188,7 +188,7 @@ ul {
   display: block; 
 }
 #map{
-  width: 70%;
+  width: 90%;
   height: 800px;
 }
 
@@ -239,7 +239,6 @@ ul {
 
 .modal-header {
   padding: 2px 16px;
-  background-color: #768176;
   color: white;
 }
 
@@ -312,10 +311,12 @@ input[type='checkbox'] {
   background-color: #fff;
   overflow: hidden;
   vertical-align: bottom;
+  text-align: center;
   background-position: center;
   background-repeat: no-repeat; 
   background-size: cover; 
   color: white;
+  margin-bottom: 60px;
 }
 
 .imgLink:hover{
@@ -344,13 +345,14 @@ input[type='checkbox'] {
 }
 
 .column {
-  float: left;
+  
   padding: 20px;
-  text-align: left;
+  display: inline-block;
 }
 
 
 #links{
   margin-top: 30px;
+  text-align: center;
 }
 
